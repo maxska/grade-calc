@@ -6,9 +6,12 @@ import java.awt.GridBagLayout;
 import java.awt.GridLayout;
 import java.util.ArrayList;
 
+import javax.swing.BorderFactory;
+import javax.swing.JButton;
 import javax.swing.JFrame;
 import javax.swing.JList;
 import javax.swing.JPanel;
+import javax.swing.border.TitledBorder;
 
 public class GUI extends JFrame
 {
@@ -16,7 +19,9 @@ public class GUI extends JFrame
 	private static final int FRAME_HEIGHT = 600;    
 	
 	private static JList coursesList;
-	
+	private static JButton addCourseButton;
+	private static JButton calculateButton;
+	 
 	public static void main(String[] args)
 	{
 		GUI gui = new GUI();
@@ -42,6 +47,8 @@ public class GUI extends JFrame
 	private void initializeMembers()
 	{
 		coursesList = new JList();
+		addCourseButton = new JButton("Add course");
+		calculateButton = new JButton("Calculate");
 		
 		
 		ArrayList<String> testArray = new ArrayList<String>();
@@ -56,6 +63,10 @@ public class GUI extends JFrame
 	
 	private void createComponents()
 	{
+		TitledBorder coursesBorder = BorderFactory.createTitledBorder("Courses");
+		coursesList.setBorder(coursesBorder);
+		
+		
 		JPanel mainPanel = new JPanel(new GridBagLayout());
 		
 		// instance of GridBagConstraints, to be able to change how JPanels are placed:
@@ -64,8 +75,8 @@ public class GUI extends JFrame
 		gbc.gridheight = 1;
 		gbc.gridx = 0; // position in x-axis is 0 (from left)
 		gbc.gridy = 0; // position in y-axis is 0 (from top)
-		gbc.weightx = 1; // width (50% of available space)
-		gbc.weighty = 1; // height (50% of available space)
+		gbc.weightx = 1; // width (100% of available space)
+		gbc.weighty = 1; // height (100% of available space)
 		gbc.anchor = GridBagConstraints.NORTH;
 		// the element should all both horizontal and vertical space:
 		gbc.fill = GridBagConstraints.BOTH; 
@@ -73,36 +84,31 @@ public class GUI extends JFrame
 		mainPanel.add(coursesList, gbc);
 		
 		
-		JPanel lowerTest = new JPanel(new GridLayout(1, 1));
+
 		
-		lowerTest.setBackground(Color.ORANGE);
 		
+		
+		
+		JPanel lowerPanel = new JPanel(new GridLayout(3, 1));
+		lowerPanel.add(addCourseButton);
+		lowerPanel.add(calculateButton);
+		
+		lowerPanel.setBackground(Color.ORANGE);
 		
 		gbc.gridheight = 1;
 		gbc.gridx = 0; // position in x-axis is 0 (from left)
-		gbc.gridy = 1; // position in y-axis is 0 (from top)
-		gbc.weightx = 1; // width (50% of available space)
-		gbc.weighty = 1; // height (50% of available space)
-		gbc.anchor = GridBagConstraints.NORTH;
+		gbc.gridy = 1; // position in y-axis is 1 (from top)
+		gbc.weightx = 0;
+		gbc.weighty = 0; 
+		gbc.anchor = GridBagConstraints.SOUTH;
 		// the element should all both horizontal and vertical space:
-		gbc.fill = GridBagConstraints.BOTH; 
+		gbc.fill = GridBagConstraints.HORIZONTAL; 
 		
-		mainPanel.add(lowerTest, gbc);
-		
-		mainPanel.setBackground(Color.GREEN);
+		mainPanel.add(lowerPanel, gbc);	
 		
 		
-		
-		
-		JPanel lowerPanel = new JPanel(new GridLayout(2, 2));
-		
-		lowerPanel.setBackground(Color.LIGHT_GRAY);
-		
-		
-		
-		setLayout(new GridLayout(2, 1));
+		setLayout(new GridLayout(1, 1));
 		add(mainPanel);
-		add(lowerPanel);
 		
 	}
 }
