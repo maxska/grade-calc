@@ -13,6 +13,9 @@ import javax.swing.JButton;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.JList;
+import javax.swing.JMenu;
+import javax.swing.JMenuBar;
+import javax.swing.JMenuItem;
 import javax.swing.JPanel;
 import javax.swing.JScrollBar;
 import javax.swing.JScrollPane;
@@ -32,6 +35,11 @@ public class GUI extends JFrame
 	
 	private static JTable coursesTable;
 	private static JScrollPane jsp;
+	
+	
+	private JMenuItem saveMenuItem;
+	private JMenuItem loadMenuItem;
+	private JMenuItem aboutMenuItem;
 	 
 	public static void main(String[] args)
 	{
@@ -45,6 +53,7 @@ public class GUI extends JFrame
 	public GUI()
 	{
 		initializeMembers();
+		createMenuBar();
 		createComponents();
 		
 		setSize(FRAME_WIDTH, FRAME_HEIGHT);
@@ -87,8 +96,29 @@ public class GUI extends JFrame
 	}
 	
 	
+	private void createMenuBar()
+	{
+		 saveMenuItem = new JMenuItem("Save to file");
+		 loadMenuItem = new JMenuItem("Load from file");
+		 aboutMenuItem = new JMenuItem("About");
+		
+		
+		
+		JMenuBar menuBar = new JMenuBar();
+		setJMenuBar(menuBar);
+		
+		JMenu fileMenu = new JMenu("File");
+		menuBar.add(fileMenu);
+		
+		JMenu aboutMenu = new JMenu("About");
+		menuBar.add(aboutMenu);
+	}
+	
 	private void createComponents()
 	{
+		
+		
+		
 		TitledBorder coursesBorder = BorderFactory.createTitledBorder("Courses");
 		coursesList.setBorder(coursesBorder);
 		
