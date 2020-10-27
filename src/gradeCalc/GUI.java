@@ -6,6 +6,8 @@ import java.awt.Font;
 import java.awt.GridBagConstraints;
 import java.awt.GridBagLayout;
 import java.awt.GridLayout;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 import java.util.ArrayList;
 
 import javax.swing.BorderFactory;
@@ -23,7 +25,7 @@ import javax.swing.JTable;
 import javax.swing.border.TitledBorder;
 import javax.swing.table.TableColumnModel;
 
-public class GUI extends JFrame
+public class GUI extends JFrame implements ActionListener
 {
 	private static final int FRAME_WIDTH  = 400;
 	private static final int FRAME_HEIGHT = 600;    
@@ -41,6 +43,7 @@ public class GUI extends JFrame
 	private JMenuItem loadMenuItem;
 	private JMenuItem aboutMenuItem;
 	 
+	
 	public static void main(String[] args)
 	{
 		GUI gui = new GUI();
@@ -100,25 +103,25 @@ public class GUI extends JFrame
 	{
 		 saveMenuItem = new JMenuItem("Save to file");
 		 loadMenuItem = new JMenuItem("Load from file");
-		 aboutMenuItem = new JMenuItem("About");
-		
-		
+		 aboutMenuItem = new JMenuItem("About");		
 		
 		JMenuBar menuBar = new JMenuBar();
 		setJMenuBar(menuBar);
 		
 		JMenu fileMenu = new JMenu("File");
+		fileMenu.add(saveMenuItem);
+		fileMenu.add(loadMenuItem);
 		menuBar.add(fileMenu);
 		
+		
 		JMenu aboutMenu = new JMenu("About");
+		aboutMenu.add(aboutMenuItem);
 		menuBar.add(aboutMenu);
 	}
 	
+	
 	private void createComponents()
-	{
-		
-		
-		
+	{		
 		TitledBorder coursesBorder = BorderFactory.createTitledBorder("Courses");
 		coursesList.setBorder(coursesBorder);
 		
@@ -146,6 +149,9 @@ public class GUI extends JFrame
 		
 		JPanel lowerPanel = new JPanel(new GridLayout(3, 1));
 		lowerPanel.add(addCourseButton);
+		
+		addCourseButton.addActionListener(this);
+		
 		lowerPanel.add(calculateButton);
 		
 		lowerPanel.setBackground(Color.ORANGE);
@@ -173,6 +179,19 @@ public class GUI extends JFrame
 		
 		setLayout(new GridLayout(1, 1));
 		add(mainPanel);
+	}
+	
+	
+	public void actionPerformed(ActionEvent e)
+	{
+		Object src = e.getSource();
+		
+		if (src == addCourseButton)
+		{
+			new AddCourseWindow();
+		}
+		
+		
 		
 	}
 }

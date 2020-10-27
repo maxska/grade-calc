@@ -46,7 +46,7 @@ public class Course
 	
 	public boolean setName(String _name)
 	{
-		if (_name.length() > 3 && _name.length() < 10)
+		if (_name.length() > 3 && _name.length() < 30)
 		{
 			name = _name;
 			return true;
