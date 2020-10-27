@@ -1,6 +1,8 @@
 package gradeCalc;
 
 import java.awt.Color;
+import java.awt.Dimension;
+import java.awt.Font;
 import java.awt.GridBagConstraints;
 import java.awt.GridBagLayout;
 import java.awt.GridLayout;
@@ -11,7 +13,11 @@ import javax.swing.JButton;
 import javax.swing.JFrame;
 import javax.swing.JList;
 import javax.swing.JPanel;
+import javax.swing.JScrollBar;
+import javax.swing.JScrollPane;
+import javax.swing.JTable;
 import javax.swing.border.TitledBorder;
+import javax.swing.table.TableColumnModel;
 
 public class GUI extends JFrame
 {
@@ -21,6 +27,9 @@ public class GUI extends JFrame
 	private static JList coursesList;
 	private static JButton addCourseButton;
 	private static JButton calculateButton;
+	
+	private static JTable coursesTable;
+	private static JScrollPane jsp;
 	 
 	public static void main(String[] args)
 	{
@@ -50,14 +59,28 @@ public class GUI extends JFrame
 		addCourseButton = new JButton("Add course");
 		calculateButton = new JButton("Calculate");
 		
+		String[] columnNames = {"Course code", "Course name", "Grade"};
+		Object[][] data = {
+				{"ABC001", "Math", 3}, {"ABC002", "Physics", 4}, {"ABC003", "Programming", 5}
+		};
 		
-		ArrayList<String> testArray = new ArrayList<String>();
-		testArray.add("a");
-		testArray.add("b");
-		testArray.add("c");
+		coursesTable = new JTable(data, columnNames);
 		
-		coursesList.setListData(testArray.toArray());
+		coursesTable.setPreferredScrollableViewportSize(new Dimension(100, 600));
+		coursesTable.setFillsViewportHeight(true);
 		
+		coursesTable.setFont(new Font("Georgia", Font.PLAIN, 15));
+		coursesTable.setRowHeight(50);
+		
+		/*
+		TableColumnModel tcm = coursesTable.getColumnModel();
+		tcm.getColumn(0).setPreferredWidth(200);
+		tcm.getColumn(1).setPreferredWidth(3330);
+		tcm.getColumn(2).setPreferredWidth(330);
+		*/
+		
+	
+		jsp = new JScrollPane(coursesTable);
 	}
 	
 	
@@ -81,11 +104,10 @@ public class GUI extends JFrame
 		// the element should all both horizontal and vertical space:
 		gbc.fill = GridBagConstraints.BOTH; 
 		
-		mainPanel.add(coursesList, gbc);
+		//mainPanel.add(coursesList, gbc);
 		
 		
-
-		
+		mainPanel.add(jsp, gbc);
 		
 		
 		
