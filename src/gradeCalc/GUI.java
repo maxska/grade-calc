@@ -11,6 +11,7 @@ import java.util.ArrayList;
 import javax.swing.BorderFactory;
 import javax.swing.JButton;
 import javax.swing.JFrame;
+import javax.swing.JLabel;
 import javax.swing.JList;
 import javax.swing.JPanel;
 import javax.swing.JScrollBar;
@@ -27,6 +28,7 @@ public class GUI extends JFrame
 	private static JList coursesList;
 	private static JButton addCourseButton;
 	private static JButton calculateButton;
+	private static JLabel averageLabel;
 	
 	private static JTable coursesTable;
 	private static JScrollPane jsp;
@@ -58,6 +60,7 @@ public class GUI extends JFrame
 		coursesList = new JList();
 		addCourseButton = new JButton("Add course");
 		calculateButton = new JButton("Calculate");
+		averageLabel = new JLabel("?");
 		
 		String[] columnNames = {"Course code", "Course name", "Grade"};
 		Object[][] data = {
@@ -125,6 +128,15 @@ public class GUI extends JFrame
 		gbc.anchor = GridBagConstraints.SOUTH;
 		// the element should all both horizontal and vertical space:
 		gbc.fill = GridBagConstraints.HORIZONTAL; 
+		
+		
+		JPanel gradePanel = new JPanel(new GridLayout(1, 2));
+		
+		gradePanel.add(new JLabel("Average grade: "));
+		gradePanel.add(averageLabel);
+		
+		
+		lowerPanel.add(gradePanel);
 		
 		mainPanel.add(lowerPanel, gbc);	
 		
