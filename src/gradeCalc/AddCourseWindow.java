@@ -12,7 +12,6 @@ import javax.swing.JTextField;
 
 public class AddCourseWindow extends JFrame implements ActionListener
 {
-	
 	JButton addButton;
 	JTextField codeField;
 	JTextField nameField;
@@ -55,6 +54,8 @@ public class AddCourseWindow extends JFrame implements ActionListener
 		add(namePanel);
 		add(gradePanel);
 		add(addButton);
+		
+		addButton.addActionListener(this);
 	}
 	
 	
@@ -62,7 +63,21 @@ public class AddCourseWindow extends JFrame implements ActionListener
 	
 	public void actionPerformed(ActionEvent e)
 	{
+		Object src = e.getSource();
 		
+		if (src == addButton)
+		{
+			String code = codeField.getText();
+			String name = nameField.getText();
+			String grade = gradeField.getText();
+			
+			if (!Logic.codeCheck(code))
+			{
+				// "Course code needs to be longer than 3 characters and shorter than 10 characters"
+				
+				return;
+			}
+		}
 	}
 
 }

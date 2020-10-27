@@ -87,12 +87,11 @@ public class GUI extends JFrame implements ActionListener
 		coursesTable.setFont(new Font("Georgia", Font.PLAIN, 15));
 		coursesTable.setRowHeight(50);
 		
-		/*
+		
 		TableColumnModel tcm = coursesTable.getColumnModel();
-		tcm.getColumn(0).setPreferredWidth(200);
-		tcm.getColumn(1).setPreferredWidth(3330);
-		tcm.getColumn(2).setPreferredWidth(330);
-		*/
+		tcm.getColumn(0).setPreferredWidth(30);
+		tcm.getColumn(1).setPreferredWidth(200);
+		tcm.getColumn(2).setPreferredWidth(10);
 		
 	
 		jsp = new JScrollPane(coursesTable);
@@ -190,8 +189,6 @@ public class GUI extends JFrame implements ActionListener
 		{
 			new AddCourseWindow();
 		}
-		
-		
 		
 	}
 }
