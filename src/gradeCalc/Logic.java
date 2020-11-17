@@ -20,7 +20,7 @@ public class Logic
 	}
 	
 	
-	public static boolean codeCheck(String code)
+	public static boolean checkCode(String code)
 	{
 		if (code.length() > 3 && code.length() < 10)
 		{
@@ -31,7 +31,7 @@ public class Logic
 	}
 	
 	
-	public static boolean nameCheck(String name)
+	public static boolean checkName(String name)
 	{
 		if (name.length() > 3 && name.length() < 30)
 		{
@@ -41,7 +41,7 @@ public class Logic
 		return false;
 	}
 	
-	public static boolean gradeCheck(double grade)
+	public static boolean checkGrade(double grade)
 	{
 		if (grade >= 0 && grade <= 5)
 		{

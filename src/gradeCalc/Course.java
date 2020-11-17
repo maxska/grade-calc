@@ -12,7 +12,7 @@ public class Course
 	 */
 	public Course(String _code, String _name, double _grade)
 	{
-		if (!Logic.codeCheck(_code) || !Logic.nameCheck(_name) || !Logic.gradeCheck(_grade))
+		if (!Logic.checkCode(_code) || !Logic.checkName(_name) || !Logic.checkGrade(_grade))
 		{
 			throw new java.lang.RuntimeException("ERROR: Invalid values for members in Course class...");
 		}
@@ -40,7 +40,7 @@ public class Course
 	
 	public boolean setCode(String _code)
 	{
-		if (Logic.codeCheck(_code))
+		if (Logic.checkCode(_code))
 		{
 			code = _code;
 			return true;
@@ -51,7 +51,7 @@ public class Course
 	
 	public boolean setName(String _name)
 	{
-		if (Logic.nameCheck(_name))
+		if (Logic.checkName(_name))
 		{
 			name = _name;
 			return true;
@@ -62,7 +62,7 @@ public class Course
 	
 	public boolean setGrade(double _grade)
 	{
-		if (Logic.gradeCheck(_grade))
+		if (Logic.checkGrade(_grade))
 		{
 			grade = _grade;
 			return true;

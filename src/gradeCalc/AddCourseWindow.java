@@ -7,6 +7,7 @@ import java.awt.event.ActionListener;
 import javax.swing.JButton;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
+import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.JTextField;
 
@@ -71,12 +72,28 @@ public class AddCourseWindow extends JFrame implements ActionListener
 			String name = nameField.getText();
 			String grade = gradeField.getText();
 			
-			if (!Logic.codeCheck(code))
+			if (!Logic.checkCode(code))
 			{
-				// "Course code needs to be longer than 3 characters and shorter than 10 characters"
-				
-				return;
+				JOptionPane.showMessageDialog(null, "Invalid course code. "
+						+ "Should be longer than 3 characters and shorter than 10.");				
+				return;	
 			}
+			
+			if (!Logic.checkName(name))
+			{
+				JOptionPane.showMessageDialog(null, "Invalid course name. "
+						+ "Should be longer than 3 characters and shorter than 30.");				
+				return;	
+			}
+			
+			if (!Logic.checkCode(grade) && !grade.equals("U") && !grade.equals("u"))
+			{
+				JOptionPane.showMessageDialog(null, "Invalid course grade. "
+						+ "Should be 3, 4, 5 or U.");				
+				return;	
+			}
+			
+			
 		}
 	}
 
