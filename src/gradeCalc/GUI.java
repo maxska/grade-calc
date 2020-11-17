@@ -38,7 +38,6 @@ public class GUI extends JFrame implements ActionListener
 	private static JTable coursesTable;
 	private static JScrollPane jsp;
 	
-	
 	private JMenuItem saveMenuItem;
 	private JMenuItem loadMenuItem;
 	private JMenuItem aboutMenuItem;

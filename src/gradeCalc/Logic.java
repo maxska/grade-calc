@@ -4,9 +4,12 @@ import java.util.ArrayList;
 
 public class Logic 
 {	
-	ArrayList<Course> courses = new ArrayList<Course>();
+	private static ArrayList<Course> courses = new ArrayList<Course>();
 	
-	
+	public static void addCourse(Course c)
+	{
+		courses.add(c);
+	}
 	
 	public void saveToFile()
 	{
@@ -41,9 +44,14 @@ public class Logic
 		return false;
 	}
 	
-	public static boolean checkGrade(double grade)
+	public static boolean checkGrade(String grade)
 	{
-		if (grade >= 0 && grade <= 5)
+		if (grade == null)
+		{
+			return true;
+		}
+		
+		if (grade.equals("3") || grade.equals("4") || grade.equals("5"))
 		{
 			return true;
 		}

@@ -4,13 +4,12 @@ public class Course
 {
 	private String code;
 	private String name;
-	private double grade;
-	
+	private String grade;
 	
 	/*
 	 * Constructor
 	 */
-	public Course(String _code, String _name, double _grade)
+	public Course(String _code, String _name, String _grade)
 	{
 		if (!Logic.checkCode(_code) || !Logic.checkName(_name) || !Logic.checkGrade(_grade))
 		{
@@ -32,11 +31,10 @@ public class Course
 		return name;
 	}
 	
-	public double getGrade()
+	public String getGrade()
 	{
 		return grade;
 	}
-	
 	
 	public boolean setCode(String _code)
 	{
@@ -60,7 +58,7 @@ public class Course
 		return false;
 	}
 	
-	public boolean setGrade(double _grade)
+	public boolean setGrade(String _grade)
 	{
 		if (Logic.checkGrade(_grade))
 		{

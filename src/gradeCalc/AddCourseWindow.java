@@ -86,15 +86,30 @@ public class AddCourseWindow extends JFrame implements ActionListener
 				return;	
 			}
 			
-			if (!Logic.checkCode(grade) && !grade.equals("U") && !grade.equals("u"))
-			{
-				JOptionPane.showMessageDialog(null, "Invalid course grade. "
-						+ "Should be 3, 4, 5 or U.");				
-				return;	
+			if (!grade.equals("U") && !grade.equals("u"))
+			{				
+				if (!Logic.checkGrade(grade))
+				{
+					JOptionPane.showMessageDialog(null, "Invalid course grade. "
+							+ "Should be 3, 4, 5 or U.");				
+					return;	
+				}
 			}
 			
 			
+			
+			if (grade.equals("U") || grade.equals("u"))
+			{
+				Logic.addCourse(new Course(code, name, null));
+			}
+			else
+			{
+				Logic.addCourse(new Course(code, name, grade));
+			}
+			
+			JOptionPane.showMessageDialog(null, "Course added successfully");
+			
+			dispose();			
 		}
 	}
-
 }
