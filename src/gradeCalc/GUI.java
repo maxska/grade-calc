@@ -23,7 +23,9 @@ import javax.swing.JScrollBar;
 import javax.swing.JScrollPane;
 import javax.swing.JTable;
 import javax.swing.border.TitledBorder;
+import javax.swing.table.DefaultTableModel;
 import javax.swing.table.TableColumnModel;
+import javax.swing.table.TableModel;
 
 public class GUI extends JFrame implements ActionListener
 {
@@ -71,14 +73,34 @@ public class GUI extends JFrame implements ActionListener
 		coursesList = new JList();
 		addCourseButton = new JButton("Add course");
 		calculateButton = new JButton("Calculate");
-		averageLabel = new JLabel("?");
+		averageLabel = new JLabel("-");
 		
+		
+		
+		DefaultTableModel tableModel = getTableModel();
+		
+		/*
 		String[] columnNames = {"Course code", "Course name", "Grade"};
 		Object[][] data = {
 				{"ABC001", "Math", 3}, {"ABC002", "Physics", 4}, {"ABC003", "Programming", 5}
-		};
+		};*/
 		
-		coursesTable = new JTable(data, columnNames);
+		//coursesTable = new JTable(data, columnNames);
+		
+		
+		coursesTable = new JTable(tableModel);
+		
+		Logic.addCourse(new Course("ABC001", "Math", "3"));
+		
+		
+		String code = Logic.courses.get(0).getCode();
+		String name = Logic.courses.get(0).getName();
+		String grade = Logic.courses.get(0).getGrade();
+		Object[] obj = {code, name, grade};
+		
+		tableModel.addRow(obj);
+		
+		
 		
 		coursesTable.setPreferredScrollableViewportSize(new Dimension(100, 600));
 		coursesTable.setFillsViewportHeight(true);
@@ -87,13 +109,84 @@ public class GUI extends JFrame implements ActionListener
 		coursesTable.setRowHeight(50);
 		
 		
-		TableColumnModel tcm = coursesTable.getColumnModel();
-		tcm.getColumn(0).setPreferredWidth(30);
-		tcm.getColumn(1).setPreferredWidth(200);
-		tcm.getColumn(2).setPreferredWidth(10);
+		//TableColumnModel tcm = coursesTable.getColumnModel();
+		//tcm.getColumn(0).setPreferredWidth(30);
+		//tcm.getColumn(1).setPreferredWidth(200);
+		//tcm.getColumn(2).setPreferredWidth(10);
 		
 	
 		jsp = new JScrollPane(coursesTable);
+	}
+	
+	private void refreshTable()
+	{
+		System.out.println("before");
+		
+		System.out.println(Logic.courses.size());
+		
+		String columnNames[] = {"Course code", "Course title", "Grade"};
+		
+		DefaultTableModel tableModel = new DefaultTableModel(columnNames, 0);
+		
+		coursesTable = new JTable(tableModel);	
+		
+		for (int i = 0; i < Logic.courses.size(); i++)
+		{
+			String code = Logic.courses.get(i).getCode();
+			String name = Logic.courses.get(i).getName();
+			String grade = Logic.courses.get(i).getGrade();
+			
+			Object[] obj = {code, name, grade};
+			
+			tableModel.addRow(obj);
+		}
+		
+		coursesTable.setPreferredScrollableViewportSize(new Dimension(100, 600));
+		coursesTable.setFillsViewportHeight(true);
+		
+		coursesTable.setFont(new Font("Georgia", Font.PLAIN, 15));
+		coursesTable.setRowHeight(50);
+		
+		
+		System.out.println("after");
+	}
+	
+	
+	private DefaultTableModel getTableModel()
+	{
+		String columnNames[] = {"Course code", "Course title", "Grade"};
+		
+		DefaultTableModel tableModel = new DefaultTableModel(columnNames, 0);
+		
+		
+		/*
+		Logic.addCourse(new Course("A001", "CourseName1", "5"));
+		Logic.addCourse(new Course("A002", "CourseName1", "5"));
+		Logic.addCourse(new Course("A003", "CourseName1", "5"));
+		Logic.addCourse(new Course("A004", "CourseName1", "5"));
+		Logic.addCourse(new Course("A005", "CourseName1", "5"));
+		
+		
+		//System.out.println(Logic.courses.size());
+		
+		for (int i = 0; i < Logic.courses.size(); i++)
+		{
+
+			String code = Logic.courses.get(i).getCode();
+
+			String name = Logic.courses.get(i).getName();
+
+			String grade = Logic.courses.get(i).getGrade();
+			
+			
+			Object[] obj = {code, name, grade};
+			
+			
+			tableModel.addRow(obj);
+		}
+		
+		*/
+		return tableModel;		
 	}
 	
 	
@@ -187,6 +280,8 @@ public class GUI extends JFrame implements ActionListener
 		if (src == addCourseButton)
 		{
 			new AddCourseWindow();
+			
+			refreshTable();
 		}
 		
 	}

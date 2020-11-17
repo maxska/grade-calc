@@ -4,7 +4,7 @@ import java.util.ArrayList;
 
 public class Logic 
 {	
-	private static ArrayList<Course> courses = new ArrayList<Course>();
+	public static ArrayList<Course> courses = new ArrayList<Course>();
 	
 	public static void addCourse(Course c)
 	{
