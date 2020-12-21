@@ -152,7 +152,7 @@ public class GUI extends JFrame implements ActionListener
 		
 		DefaultTableModel tableModel = getTableModel();
 		coursesTable = new JTable(tableModel);
-		Logic.addCourse(new Course("ABC001", "Math", "3"));  // for testing
+		Logic.addCourse(new FourCourse("ABC001", "Math", "3"));  // for testing
 		refreshTable();
 		
 		coursesTable.setPreferredScrollableViewportSize(new Dimension(100, 600));

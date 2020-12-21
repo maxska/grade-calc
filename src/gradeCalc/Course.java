@@ -1,24 +1,23 @@
 package gradeCalc;
 
-public class Course 
+public abstract class Course 
 {
 	private String code;
 	private String name;
-	private String grade;
+	
 	
 	/*
 	 * Constructor
 	 */
-	public Course(String _code, String _name, String _grade)
+	public Course(String _code, String _name)
 	{
-		if (!Logic.checkCode(_code) || !Logic.checkName(_name) || !Logic.checkGrade(_grade))
+		if (!Logic.checkCode(_code) || !Logic.checkName(_name))
 		{
 			throw new java.lang.RuntimeException("ERROR: Invalid values for members in Course class...");
 		}
 		
 		code = _code;
 		name = _name;
-		grade = _grade;
 	}
 	
 	
@@ -33,11 +32,13 @@ public class Course
 		return name;
 	}
 	
-	
+	/*
 	public String getGrade()
 	{
 		return grade;
 	}
+	*/
+	abstract public String getGrade();
 	
 	
 	public boolean setCode(String _code)
@@ -63,7 +64,7 @@ public class Course
 		return false;
 	}
 	
-	
+	/*
 	public boolean setGrade(String _grade)
 	{
 		if (Logic.checkGrade(_grade))
@@ -74,4 +75,5 @@ public class Course
 		
 		return false;
 	}
+	*/
 }

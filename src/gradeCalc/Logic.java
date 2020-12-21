@@ -44,6 +44,7 @@ public class Logic
 		return false;
 	}
 	
+	/*
 	public static boolean checkGrade(String grade)
 	{
 		if (grade == null)
@@ -58,6 +59,7 @@ public class Logic
 		
 		return false;
 	}
+	*/
 	
 	
 	

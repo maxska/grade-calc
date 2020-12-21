@@ -4,11 +4,13 @@ import java.awt.GridLayout;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
+import javax.swing.ButtonGroup;
 import javax.swing.JButton;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.JOptionPane;
 import javax.swing.JPanel;
+import javax.swing.JRadioButton;
 import javax.swing.JTextField;
 
 public class AddCourseWindow extends JFrame implements ActionListener
@@ -17,6 +19,8 @@ public class AddCourseWindow extends JFrame implements ActionListener
 	JTextField codeField;
 	JTextField nameField;
 	JTextField gradeField;
+	JRadioButton twoButton;
+	JRadioButton fourButton;
 		
 	
 	public AddCourseWindow()
@@ -32,7 +36,18 @@ public class AddCourseWindow extends JFrame implements ActionListener
 	
 	
 	public void createComponents()
-	{		
+	{
+		JPanel courseTypePanel = new JPanel(new GridLayout(2, 1));
+		twoButton = new JRadioButton("U/G-course");
+		fourButton = new JRadioButton("U/3/4/5-course");
+		courseTypePanel.add(twoButton);
+		courseTypePanel.add(fourButton);
+		
+		ButtonGroup BG = new ButtonGroup();
+		BG.add(twoButton);
+		BG.add(fourButton);
+		
+		
 		JPanel codePanel = new JPanel(new GridLayout(1, 2));
 		codePanel.add(new JLabel("Course code: "));
 		codeField = new JTextField();
@@ -50,7 +65,8 @@ public class AddCourseWindow extends JFrame implements ActionListener
 		
 		addButton = new JButton("Add course");
 		
-		setLayout(new GridLayout(4, 1));
+		setLayout(new GridLayout(5, 1));
+		add(courseTypePanel);
 		add(codePanel);
 		add(namePanel);
 		add(gradePanel);
@@ -86,31 +102,41 @@ public class AddCourseWindow extends JFrame implements ActionListener
 				return;	
 			}
 			
-			if (!grade.equals("U") && !grade.equals("u"))
-			{				
-				if (!Logic.checkGrade(grade))
+			if (grade.equals("u"))
+				grade = "U";
+			else if (grade.equals("g"))
+				grade = "G";
+			
+			if (fourButton.isSelected())
+			{
+				if (!FourCourse.checkTheGrade(grade))
 				{
 					JOptionPane.showMessageDialog(null, "Invalid course grade. "
-							+ "Should be 3, 4, 5 or U.");				
+							+ "Should be U, 3, 4 or 5.");					
 					return;	
 				}
+
+				Logic.addCourse(new FourCourse(code, name, grade));
 			}
-			
-			
-			
-			if (grade.equals("U") || grade.equals("u"))
+			else if (twoButton.isSelected())
 			{
-				Logic.addCourse(new Course(code, name, null));
+				if (!TwoCourse.checkTheGrade(grade))
+				{
+					JOptionPane.showMessageDialog(null, "Invalid course grade. "
+							+ "Should be U or G.");
+					return;	
+				}
+
+				Logic.addCourse(new TwoCourse(code, name, grade));
 			}
 			else
 			{
-				Logic.addCourse(new Course(code, name, grade));
+				JOptionPane.showMessageDialog(null, "Select a course type.");
+				return;	
 			}
 			
 			JOptionPane.showMessageDialog(null, "Course added successfully");
-			
 			GUI.refreshTable();
-			
 			dispose();			
 		}
 	}
