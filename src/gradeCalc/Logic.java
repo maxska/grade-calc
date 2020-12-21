@@ -66,6 +66,23 @@ public class Logic
 	
 	public static void openFromFile()
 	{
+		if (courses.size() > 0)
+		{
+			int answer = JOptionPane.showConfirmDialog(null,
+					"You have unsaved work, do you want to open file and overwrite it?",
+					"Warning",
+					JOptionPane.YES_NO_OPTION);
+			
+			if (answer == JOptionPane.NO_OPTION)
+			{
+				return;
+			}
+			// proceed otherwise
+			
+			courses.clear();
+		}
+		
+		
 		try
 		{
 			Scanner s = new Scanner(new File("program_files/grades.txt"));
