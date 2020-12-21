@@ -21,7 +21,7 @@ public class AddCourseWindow extends JFrame implements ActionListener
 	JTextField gradeField;
 	JRadioButton twoButton;
 	JRadioButton fourButton;
-		
+	
 	
 	public AddCourseWindow()
 	{
@@ -76,8 +76,6 @@ public class AddCourseWindow extends JFrame implements ActionListener
 	}
 	
 	
-	
-	
 	public void actionPerformed(ActionEvent e)
 	{
 		Object src = e.getSource();
@@ -121,7 +119,7 @@ public class AddCourseWindow extends JFrame implements ActionListener
 			{
 				JOptionPane.showMessageDialog(null, 
 						"This course code has been used before. "
-						+ "It needs to be unique.");				
+						+ "It needs to be unique.");
 				return;	
 			}
 				

@@ -35,6 +35,8 @@ public class Logic
 				res += "t";
 			else if (courses.get(i) instanceof FourCourse)
 				res += "f";
+			else if (courses.get(i) instanceof CourseSeparator)
+				res += "s";
 			else
 				throw new java.lang.RuntimeException(
 						"ERROR: Invalid class when saving to file...");
@@ -99,6 +101,11 @@ public class Logic
 				else if (line[3].equals("f"))
 				{
 					courses.add(new FourCourse(line[0], line[1], line[2]));					
+				}
+				else if(line[3].equals("s"))
+				{
+					String name = line[1].replaceAll("-", "");
+					courses.add(new CourseSeparator(name));			
 				}
 				else
 				{
@@ -193,7 +200,17 @@ public class Logic
 			}
 		}
 		
-		return false;
+		return true;
 	}
 	
+	/*
+	 * Perhaps a temporary solution...
+	 */
+	public static void addSeparator()
+	{
+		String answer = JOptionPane.showInputDialog(null, "Enter the text for the separator:");
+		courses.add(new CourseSeparator(answer));
+		
+		GUI.refreshTable();
+	}
 }

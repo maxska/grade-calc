@@ -11,13 +11,29 @@ public abstract class Course
 	 */
 	public Course(String _code, String _name)
 	{
-		if (!Logic.checkCode(_code) || !Logic.checkName(_name))
+		if (!checkCode(_code) || !checkName(_name))
 		{
 			throw new java.lang.RuntimeException("ERROR: Invalid values for members in Course class...");
 		}
 		
 		code = _code;
 		name = _name;
+	}
+	
+
+	public boolean checkCode(String code)
+	{
+		return code.length() == 6;
+	}
+	
+	public boolean checkName(String name)
+	{
+		if (name.length() > 3 && name.length() < 30)
+		{
+			return true;
+		}
+		
+		return false;
 	}
 	
 	
@@ -38,7 +54,7 @@ public abstract class Course
 	
 	public boolean setCode(String _code)
 	{
-		if (Logic.checkCode(_code))
+		if (checkCode(_code))
 		{
 			code = _code;
 			return true;

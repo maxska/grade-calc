@@ -39,6 +39,7 @@ public class GUI extends JFrame implements ActionListener
 	
 	private static JList coursesList;
 	private static JButton addCourseButton;
+	private static JButton addSeparatorButton;
 	private static JButton calculateButton;
 	private static JLabel averageLabel;
 	
@@ -158,6 +159,11 @@ public class GUI extends JFrame implements ActionListener
 		{
 			Logic.openFromFile();
 		}
+		
+		if (src == addSeparatorButton)
+		{
+			Logic.addSeparator();
+		}
 	}
 	
 	
@@ -172,6 +178,7 @@ public class GUI extends JFrame implements ActionListener
 	{
 		coursesList = new JList();
 		addCourseButton = new JButton("Add course");
+		addSeparatorButton = new JButton("Add separator");
 		calculateButton = new JButton("Calculate");
 		averageLabel = new JLabel("Average grade hasn't been calculated yet");
 		
@@ -211,7 +218,6 @@ public class GUI extends JFrame implements ActionListener
 		aboutMenu.add(aboutMenuItem);
 		menuBar.add(aboutMenu);
 		
-		
 		saveMenuItem.addActionListener(this);
 		loadMenuItem.addActionListener(this);
 	}
@@ -224,7 +230,6 @@ public class GUI extends JFrame implements ActionListener
 	{		
 		TitledBorder coursesBorder = BorderFactory.createTitledBorder("Courses");
 		coursesList.setBorder(coursesBorder);
-		
 		
 		JPanel mainPanel = new JPanel(new GridBagLayout());
 		
@@ -241,14 +246,14 @@ public class GUI extends JFrame implements ActionListener
 		// the element should all both horizontal and vertical space:
 		gbc.fill = GridBagConstraints.BOTH; 
 		
-		//mainPanel.add(coursesList, gbc);
-		
 		mainPanel.add(jsp, gbc);
 		
-		
-		JPanel lowerPanel = new JPanel(new GridLayout(3, 1));
+		JPanel lowerPanel = new JPanel(new GridLayout(4, 1));
 		lowerPanel.add(addCourseButton);
 		addCourseButton.addActionListener(this);
+		
+		lowerPanel.add(addSeparatorButton);
+		addSeparatorButton.addActionListener(this);
 		
 		lowerPanel.add(calculateButton);
 		calculateButton.addActionListener(this);
@@ -264,16 +269,10 @@ public class GUI extends JFrame implements ActionListener
 		// the element should all both horizontal and vertical space:
 		gbc.fill = GridBagConstraints.HORIZONTAL; 
 		
-		
 		JPanel gradePanel = new JPanel(new GridLayout(1, 2));
-		
 		gradePanel.add(averageLabel);
-		
-		
 		lowerPanel.add(gradePanel);
-		
 		mainPanel.add(lowerPanel, gbc);	
-		
 		
 		setLayout(new GridLayout(1, 1));
 		add(mainPanel);
