@@ -108,15 +108,12 @@ public class Logic
 			}
 			
 			GUI.refreshTable();
-			
 			JOptionPane.showMessageDialog(null, "Opened program_files/grades.txt");
 		}
 		catch (FileNotFoundException e)
 		{
 			System.out.println("File not found...");
 		}
-
-	
 	}
 	
 	
@@ -184,6 +181,19 @@ public class Logic
 		}
 		
 		return sum;
+	}
+	
+	public static boolean uniqueCourseCode(String code)
+	{
+		for (int i = 0; i < courses.size(); i++)
+		{
+			if (courses.get(i).getCode().equals(code))
+			{
+				return false;
+			}
+		}
+		
+		return false;
 	}
 	
 }

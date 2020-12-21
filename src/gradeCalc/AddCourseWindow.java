@@ -117,6 +117,15 @@ public class AddCourseWindow extends JFrame implements ActionListener
 				return;	
 			}
 			
+			if (!Logic.uniqueCourseCode(code))
+			{
+				JOptionPane.showMessageDialog(null, 
+						"This course code has been used before. "
+						+ "It needs to be unique.");				
+				return;	
+			}
+				
+			
 			if (fourButton.isSelected())
 			{
 				if (!FourCourse.checkTheGrade(grade))

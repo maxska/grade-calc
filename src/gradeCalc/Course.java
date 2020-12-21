@@ -58,18 +58,6 @@ public abstract class Course
 		
 		return false;
 	}
-	
-	/*
-	public boolean setGrade(String _grade)
-	{
-		if (Logic.checkGrade(_grade))
-		{
-			grade = _grade;
-			return true;
-		}
-		
-		return false;
-	}
-	*/
-	public abstract boolean setGrade(String grade);
+
+	abstract public boolean setGrade(String grade);
 }
