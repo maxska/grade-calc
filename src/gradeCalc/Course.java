@@ -76,4 +76,5 @@ public abstract class Course
 		return false;
 	}
 	*/
+	public abstract boolean setGrade(String grade);
 }

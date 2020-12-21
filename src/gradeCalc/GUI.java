@@ -18,6 +18,7 @@ import javax.swing.JList;
 import javax.swing.JMenu;
 import javax.swing.JMenuBar;
 import javax.swing.JMenuItem;
+import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.JScrollBar;
 import javax.swing.JScrollPane;
@@ -133,6 +134,23 @@ public class GUI extends JFrame implements ActionListener
 		{
 			new AddCourseWindow();
 		}
+		
+		if (src == calculateButton)
+		{
+			double average = Logic.calculateAverage();
+			int failed = Logic.countFailed();
+			
+			JOptionPane.showMessageDialog(null, "Calculated");
+			
+			if (failed == 0)
+			{
+				averageLabel.setText("Average: " + average);
+			}
+			else
+			{
+				averageLabel.setText("Average: " + average + ", with " + failed + " failed");
+			}
+		}
 	}
 	
 	
@@ -148,7 +166,7 @@ public class GUI extends JFrame implements ActionListener
 		coursesList = new JList();
 		addCourseButton = new JButton("Add course");
 		calculateButton = new JButton("Calculate");
-		averageLabel = new JLabel("-");
+		averageLabel = new JLabel("Average grade hasn't been calculated yet");
 		
 		DefaultTableModel tableModel = getTableModel();
 		coursesTable = new JTable(tableModel);
@@ -224,10 +242,10 @@ public class GUI extends JFrame implements ActionListener
 		
 		JPanel lowerPanel = new JPanel(new GridLayout(3, 1));
 		lowerPanel.add(addCourseButton);
-		
 		addCourseButton.addActionListener(this);
 		
 		lowerPanel.add(calculateButton);
+		calculateButton.addActionListener(this);
 		
 		lowerPanel.setBackground(Color.ORANGE);
 		
@@ -243,7 +261,6 @@ public class GUI extends JFrame implements ActionListener
 		
 		JPanel gradePanel = new JPanel(new GridLayout(1, 2));
 		
-		gradePanel.add(new JLabel("Average grade: "));
 		gradePanel.add(averageLabel);
 		
 		
@@ -257,3 +274,6 @@ public class GUI extends JFrame implements ActionListener
 	}
 	
 }
+
+
+

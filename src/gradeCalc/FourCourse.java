@@ -34,6 +34,17 @@ public class FourCourse extends Course
 		return grade;
 	}
 	
+	public boolean setGrade(String _grade)
+	{
+		if (checkTheGrade(_grade))
+		{
+			grade = _grade;
+			return true;
+		}
+		
+		return false;
+	}
+	
 	
 
 }

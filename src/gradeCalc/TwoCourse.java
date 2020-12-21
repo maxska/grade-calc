@@ -19,13 +19,8 @@ public class TwoCourse extends Course
 	}
 	
 	public static boolean checkTheGrade(String grade)
-	{			
-		if (grade == null)
-		{
-			return true;
-		}
-		
-		if (grade.equals("G"))
+	{
+		if (grade.equals("U") || grade.equals("G"))
 		{
 			return true;
 		}
@@ -37,6 +32,17 @@ public class TwoCourse extends Course
 	public String getGrade()
 	{
 		return grade;
+	}
+	
+	public boolean setGrade(String _grade)
+	{
+		if (checkTheGrade(_grade))
+		{
+			grade = _grade;
+			return true;
+		}
+		
+		return false;
 	}
 
 }

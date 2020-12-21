@@ -6,10 +6,12 @@ public class Logic
 {	
 	public static ArrayList<Course> courses = new ArrayList<Course>();
 	
+	
 	public static void addCourse(Course c)
 	{
 		courses.add(c);
 	}
+	
 	
 	public void saveToFile()
 	{
@@ -44,26 +46,55 @@ public class Logic
 		return false;
 	}
 	
-	/*
-	public static boolean checkGrade(String grade)
+	
+	public static double calculateAverage()
 	{
-		if (grade == null)
+		double sum = 0;
+		int passedCourses = 0;
+		int thisGrade;
+		
+		for (int i = 0; i < courses.size(); i++)
 		{
-			return true;
+			String grade = Logic.courses.get(i).getGrade();
+			
+			if (!(grade.equals("G") || grade.equals("U")))
+			{
+				passedCourses += 1;
+				
+				try
+				{
+					thisGrade = Integer.parseInt(grade);
+					sum += thisGrade;
+				}
+				catch(NumberFormatException e)
+				{
+					System.out.println("An error occurred when converting grade String to int...");
+				}
+			}
+			// else, don't count it
 		}
 		
-		if (grade.equals("3") || grade.equals("4") || grade.equals("5"))
-		{
-			return true;
-		}
-		
-		return false;
+		return sum/passedCourses;
 	}
-	*/
 	
 	
-	
-	
+	public static int countFailed()
+	{
+		int sum = 0;
+		
+		for (int i = 0; i < courses.size(); i++)
+		{
+			String grade = Logic.courses.get(i).getGrade();
+			
+			if (grade.equals("U"))
+			{
+				sum += 1;
+			}
+			// else, don't count it
+		}
+		
+		return sum;
+	}
 	
 	
 }
