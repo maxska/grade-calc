@@ -1,10 +1,12 @@
 package gradeCalc;
 
+import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.FileWriter;
 import java.io.IOException;
 import java.io.PrintWriter;
 import java.util.ArrayList;
+import java.util.Scanner;
 
 import javax.swing.JOptionPane;
 
@@ -27,10 +29,20 @@ public class Logic
 		{
 			res += courses.get(i).getCode() + ";" 
 					+ courses.get(i).getName() + ";" 
-					+ courses.get(i).getGrade() + "\n";		
+					+ courses.get(i).getGrade() + ";";
+			
+			if (courses.get(i) instanceof TwoCourse)
+				res += "t";
+			else if (courses.get(i) instanceof FourCourse)
+				res += "f";
+			else
+				throw new java.lang.RuntimeException(
+						"ERROR: Invalid class when saving to file...");
+			
+			res += "\n";
 		}
 		
-		try 
+		try
 		{					
 			PrintWriter pw = new PrintWriter(new FileWriter("program_files/grades.txt"));
 			pw.write(res);
@@ -52,9 +64,42 @@ public class Logic
 	}
 	
 	
-	public void openFromFile()
+	public static void openFromFile()
 	{
-		
+		try
+		{
+			Scanner s = new Scanner(new File("program_files/grades.txt"));
+			
+			while (s.hasNextLine())
+			{
+				String lineString = s.nextLine();
+				String line[] = lineString.split(";");
+				
+				if (line[3].equals("t"))
+				{
+					courses.add(new TwoCourse(line[0], line[1], line[2]));
+				}
+				else if (line[3].equals("f"))
+				{
+					courses.add(new FourCourse(line[0], line[1], line[2]));					
+				}
+				else
+				{
+					throw new java.lang.RuntimeException(
+							"ERROR: Invalid class when reading to file...");
+				}
+			}
+			
+			GUI.refreshTable();
+			
+			JOptionPane.showMessageDialog(null, "Opened program_files/grades.txt");
+		}
+		catch (FileNotFoundException e)
+		{
+			System.out.println("File not found...");
+		}
+
+	
 	}
 	
 	

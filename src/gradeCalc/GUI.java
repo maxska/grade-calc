@@ -98,9 +98,14 @@ public class GUI extends JFrame implements ActionListener
 			Object[] obj = {code, name, grade};
 			
 			tableModel.addRow(obj);
-		}
+		}	
 		
 		coursesTable.setModel(tableModel);
+		
+		TableColumnModel tcm = coursesTable.getColumnModel();
+		tcm.getColumn(0).setPreferredWidth(30);
+		tcm.getColumn(1).setPreferredWidth(200);
+		tcm.getColumn(2).setPreferredWidth(10);
 	}
 	
 	
@@ -148,6 +153,11 @@ public class GUI extends JFrame implements ActionListener
 		{
 			Logic.saveToFile();
 		}
+		
+		if (src == loadMenuItem)
+		{
+			Logic.openFromFile();
+		}
 	}
 	
 	
@@ -175,12 +185,7 @@ public class GUI extends JFrame implements ActionListener
 		
 		coursesTable.setFont(new Font("Georgia", Font.PLAIN, 15));
 		coursesTable.setRowHeight(50);
-		
-		TableColumnModel tcm = coursesTable.getColumnModel();
-		tcm.getColumn(0).setPreferredWidth(30);
-		tcm.getColumn(1).setPreferredWidth(200);
-		tcm.getColumn(2).setPreferredWidth(10);
-	
+
 		jsp = new JScrollPane(coursesTable);
 	}
 	
@@ -209,7 +214,6 @@ public class GUI extends JFrame implements ActionListener
 		
 		saveMenuItem.addActionListener(this);
 		loadMenuItem.addActionListener(this);
-		aboutMenuItem.addActionListener(this);
 	}
 	
 	
