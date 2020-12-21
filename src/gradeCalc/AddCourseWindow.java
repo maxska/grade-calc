@@ -91,7 +91,7 @@ public class AddCourseWindow extends JFrame implements ActionListener
 			if (!Logic.checkCode(code))
 			{
 				JOptionPane.showMessageDialog(null, "Invalid course code. "
-						+ "Should be longer than 3 characters and shorter than 10.");				
+						+ "Should be 6 characters.");				
 				return;	
 			}
 			
@@ -106,6 +106,9 @@ public class AddCourseWindow extends JFrame implements ActionListener
 				grade = "U";
 			else if (grade.equals("g"))
 				grade = "G";
+			
+			code = code.toUpperCase();
+			name = name.substring(0, 1).toUpperCase() + name.substring(1, name.length());
 			
 			if (fourButton.isSelected())
 			{

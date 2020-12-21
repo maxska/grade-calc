@@ -27,12 +27,7 @@ public class Logic
 	
 	public static boolean checkCode(String code)
 	{
-		if (code.length() > 3 && code.length() < 10)
-		{
-			return true;
-		}
-		
-		return false;
+		return code.length() == 6;
 	}
 	
 	
