@@ -21,20 +21,24 @@ public class Course
 		grade = _grade;
 	}
 	
+	
 	public String getCode()
 	{
 		return code;
 	}
+	
 	
 	public String getName()
 	{
 		return name;
 	}
 	
+	
 	public String getGrade()
 	{
 		return grade;
 	}
+	
 	
 	public boolean setCode(String _code)
 	{
@@ -47,6 +51,7 @@ public class Course
 		return false;
 	}
 	
+	
 	public boolean setName(String _name)
 	{
 		if (Logic.checkName(_name))
@@ -57,6 +62,7 @@ public class Course
 		
 		return false;
 	}
+	
 	
 	public boolean setGrade(String _grade)
 	{

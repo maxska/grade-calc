@@ -29,6 +29,10 @@ import javax.swing.table.TableModel;
 
 public class GUI extends JFrame implements ActionListener
 {
+	// ########################################################################
+	//                              Members
+	// ########################################################################
+	
 	private static final int FRAME_WIDTH  = 400;
 	private static final int FRAME_HEIGHT = 600;    
 	
@@ -43,8 +47,16 @@ public class GUI extends JFrame implements ActionListener
 	private JMenuItem saveMenuItem;
 	private JMenuItem loadMenuItem;
 	private JMenuItem aboutMenuItem;
-	 
 	
+	
+	// ########################################################################
+	//                              Functions
+	// ########################################################################
+	
+	
+	/*
+	 * Main function, initializes the gui by calling the GUI constructor.
+	 */
 	public static void main(String[] args)
 	{
 		GUI gui = new GUI();
@@ -66,9 +78,6 @@ public class GUI extends JFrame implements ActionListener
 		setDefaultCloseOperation(EXIT_ON_CLOSE);
 		setVisible(true);		
 	}
-	
-	
-	
 	
 	
 	/*
@@ -101,6 +110,7 @@ public class GUI extends JFrame implements ActionListener
 		//System.out.println("after");
 	}
 	
+	
 	/*
 	 * Creates a DefaultTableModel containing the column headers and returns it
 	 */
@@ -112,7 +122,27 @@ public class GUI extends JFrame implements ActionListener
 	}
 	
 	
+	/*
+	 * Handles the actions in the gui, e.g. clicking
+	 */
+	public void actionPerformed(ActionEvent e)
+	{
+		Object src = e.getSource();
+		
+		if (src == addCourseButton)
+		{
+			new AddCourseWindow();
+		}
+	}
 	
+	
+	// ########################################################################
+	//                              Initialization
+	// ########################################################################
+
+	/*
+	 * Initializing members of this class
+	 */
 	private void initializeMembers()
 	{
 		coursesList = new JList();
@@ -123,15 +153,7 @@ public class GUI extends JFrame implements ActionListener
 		DefaultTableModel tableModel = getTableModel();
 		coursesTable = new JTable(tableModel);
 		Logic.addCourse(new Course("ABC001", "Math", "3"));  // for testing
-		
-		String code = Logic.courses.get(0).getCode();
-		String name = Logic.courses.get(0).getName();
-		String grade = Logic.courses.get(0).getGrade();
-		Object[] obj = {code, name, grade};
-		
-		tableModel.addRow(obj);
-		
-		
+		refreshTable();
 		
 		coursesTable.setPreferredScrollableViewportSize(new Dimension(100, 600));
 		coursesTable.setFillsViewportHeight(true);
@@ -139,17 +161,18 @@ public class GUI extends JFrame implements ActionListener
 		coursesTable.setFont(new Font("Georgia", Font.PLAIN, 15));
 		coursesTable.setRowHeight(50);
 		
-		
 		//TableColumnModel tcm = coursesTable.getColumnModel();
 		//tcm.getColumn(0).setPreferredWidth(30);
 		//tcm.getColumn(1).setPreferredWidth(200);
 		//tcm.getColumn(2).setPreferredWidth(10);
-		
 	
 		jsp = new JScrollPane(coursesTable);
 	}
 	
 	
+	/*
+	 * Creates the menu bar in the gui
+	 */
 	private void createMenuBar()
 	{
 		 saveMenuItem = new JMenuItem("Save to file");
@@ -164,13 +187,15 @@ public class GUI extends JFrame implements ActionListener
 		fileMenu.add(loadMenuItem);
 		menuBar.add(fileMenu);
 		
-		
 		JMenu aboutMenu = new JMenu("About");
 		aboutMenu.add(aboutMenuItem);
 		menuBar.add(aboutMenu);
 	}
 	
 	
+	/*
+	 * Creates and adds components to the gui
+	 */
 	private void createComponents()
 	{		
 		TitledBorder coursesBorder = BorderFactory.createTitledBorder("Courses");
@@ -179,7 +204,8 @@ public class GUI extends JFrame implements ActionListener
 		
 		JPanel mainPanel = new JPanel(new GridBagLayout());
 		
-		// instance of GridBagConstraints, to be able to change how JPanels are placed:
+		// instance of GridBagConstraints, to be able to change how JPanels 
+		// are placed:
 		GridBagConstraints gbc = new GridBagConstraints();
 		
 		gbc.gridheight = 1;
@@ -193,9 +219,7 @@ public class GUI extends JFrame implements ActionListener
 		
 		//mainPanel.add(coursesList, gbc);
 		
-		
 		mainPanel.add(jsp, gbc);
-		
 		
 		
 		JPanel lowerPanel = new JPanel(new GridLayout(3, 1));
@@ -232,19 +256,4 @@ public class GUI extends JFrame implements ActionListener
 		add(mainPanel);
 	}
 	
-	
-	
-	
-	public void actionPerformed(ActionEvent e)
-	{
-		Object src = e.getSource();
-		
-		if (src == addCourseButton)
-		{
-			new AddCourseWindow();
-			
-			refreshTable();
-		}
-		
-	}
 }
