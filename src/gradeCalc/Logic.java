@@ -1,6 +1,12 @@
 package gradeCalc;
 
+import java.io.FileNotFoundException;
+import java.io.FileWriter;
+import java.io.IOException;
+import java.io.PrintWriter;
 import java.util.ArrayList;
+
+import javax.swing.JOptionPane;
 
 public class Logic 
 {	
@@ -13,9 +19,36 @@ public class Logic
 	}
 	
 	
-	public void saveToFile()
+	public static boolean saveToFile()
 	{
+		String res = "";
 		
+		for (int i = 0; i < courses.size(); i++)
+		{
+			res += courses.get(i).getCode() + ";" 
+					+ courses.get(i).getName() + ";" 
+					+ courses.get(i).getGrade() + "\n";		
+		}
+		
+		try 
+		{					
+			PrintWriter pw = new PrintWriter(new FileWriter("program_files/grades.txt"));
+			pw.write(res);
+			pw.close();
+			
+			JOptionPane.showMessageDialog(null, "Saved to program_files/grades.txt");
+			//return false;
+		} 
+		catch (FileNotFoundException e1)
+		{
+			JOptionPane.showMessageDialog(null, "Error finding the file...");
+		} 
+		catch (IOException e2) 
+		{
+			JOptionPane.showMessageDialog(null, "Unknown error...");
+		}
+		
+		return true;
 	}
 	
 	
@@ -50,7 +83,7 @@ public class Logic
 		
 		for (int i = 0; i < courses.size(); i++)
 		{
-			String grade = Logic.courses.get(i).getGrade();
+			String grade = courses.get(i).getGrade();
 			
 			if (!(grade.equals("G") || grade.equals("U")))
 			{
@@ -79,7 +112,7 @@ public class Logic
 		
 		for (int i = 0; i < courses.size(); i++)
 		{
-			String grade = Logic.courses.get(i).getGrade();
+			String grade = courses.get(i).getGrade();
 			
 			if (grade.equals("U"))
 			{
@@ -90,6 +123,5 @@ public class Logic
 		
 		return sum;
 	}
-	
 	
 }

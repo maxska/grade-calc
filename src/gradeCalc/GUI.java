@@ -87,12 +87,7 @@ public class GUI extends JFrame implements ActionListener
 	 */
 	public static void refreshTable()
 	{
-		//System.out.println("before");
-		//System.out.println(Logic.courses.size());
-		
 		DefaultTableModel tableModel = getTableModel();
-		
-		//coursesTable = new JTable(tableModel);	
 		
 		for (int i = 0; i < Logic.courses.size(); i++)
 		{
@@ -105,10 +100,7 @@ public class GUI extends JFrame implements ActionListener
 			tableModel.addRow(obj);
 		}
 		
-		//tableModel.fireTableDataChanged();
 		coursesTable.setModel(tableModel);
-
-		//System.out.println("after");
 	}
 	
 	
@@ -151,6 +143,11 @@ public class GUI extends JFrame implements ActionListener
 				averageLabel.setText("Average: " + average + ", with " + failed + " failed");
 			}
 		}
+		
+		if (src == saveMenuItem)
+		{
+			Logic.saveToFile();
+		}
 	}
 	
 	
@@ -179,10 +176,10 @@ public class GUI extends JFrame implements ActionListener
 		coursesTable.setFont(new Font("Georgia", Font.PLAIN, 15));
 		coursesTable.setRowHeight(50);
 		
-		//TableColumnModel tcm = coursesTable.getColumnModel();
-		//tcm.getColumn(0).setPreferredWidth(30);
-		//tcm.getColumn(1).setPreferredWidth(200);
-		//tcm.getColumn(2).setPreferredWidth(10);
+		TableColumnModel tcm = coursesTable.getColumnModel();
+		tcm.getColumn(0).setPreferredWidth(30);
+		tcm.getColumn(1).setPreferredWidth(200);
+		tcm.getColumn(2).setPreferredWidth(10);
 	
 		jsp = new JScrollPane(coursesTable);
 	}
@@ -208,6 +205,11 @@ public class GUI extends JFrame implements ActionListener
 		JMenu aboutMenu = new JMenu("About");
 		aboutMenu.add(aboutMenuItem);
 		menuBar.add(aboutMenu);
+		
+		
+		saveMenuItem.addActionListener(this);
+		loadMenuItem.addActionListener(this);
+		aboutMenuItem.addActionListener(this);
 	}
 	
 	

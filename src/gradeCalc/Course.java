@@ -32,12 +32,7 @@ public abstract class Course
 		return name;
 	}
 	
-	/*
-	public String getGrade()
-	{
-		return grade;
-	}
-	*/
+	
 	abstract public String getGrade();
 	
 	

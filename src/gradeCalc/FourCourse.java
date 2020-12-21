@@ -28,7 +28,7 @@ public class FourCourse extends Course
 		return false;
 	}
 	
-
+	
 	public String getGrade()
 	{
 		return grade;

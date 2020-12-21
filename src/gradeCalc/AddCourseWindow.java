@@ -110,6 +110,13 @@ public class AddCourseWindow extends JFrame implements ActionListener
 			code = code.toUpperCase();
 			name = name.substring(0, 1).toUpperCase() + name.substring(1, name.length());
 			
+			if (code.contains(";") || name.contains(";"))
+			{
+				JOptionPane.showMessageDialog(null, 
+						"The fields cannot contain ';'");				
+				return;	
+			}
+			
 			if (fourButton.isSelected())
 			{
 				if (!FourCourse.checkTheGrade(grade))
