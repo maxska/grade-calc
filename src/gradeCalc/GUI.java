@@ -68,6 +68,51 @@ public class GUI extends JFrame implements ActionListener
 	}
 	
 	
+	
+	
+	
+	/*
+	 * Refreshes coursesTable by rebuilding the tableModel 
+	 * from all courses in Logic.java
+	 */
+	public static void refreshTable()
+	{
+		//System.out.println("before");
+		//System.out.println(Logic.courses.size());
+		
+		DefaultTableModel tableModel = getTableModel();
+		
+		//coursesTable = new JTable(tableModel);	
+		
+		for (int i = 0; i < Logic.courses.size(); i++)
+		{
+			String code = Logic.courses.get(i).getCode();
+			String name = Logic.courses.get(i).getName();
+			String grade = Logic.courses.get(i).getGrade();
+			
+			Object[] obj = {code, name, grade};
+			
+			tableModel.addRow(obj);
+		}
+		
+		//tableModel.fireTableDataChanged();
+		coursesTable.setModel(tableModel);
+
+		//System.out.println("after");
+	}
+	
+	/*
+	 * Creates a DefaultTableModel containing the column headers and returns it
+	 */
+	private static DefaultTableModel getTableModel()
+	{
+		String columnNames[] = {"Course code", "Course title", "Grade"};
+		DefaultTableModel tableModel = new DefaultTableModel(columnNames, 0);
+		return tableModel;		
+	}
+	
+	
+	
 	private void initializeMembers()
 	{
 		coursesList = new JList();
@@ -75,23 +120,9 @@ public class GUI extends JFrame implements ActionListener
 		calculateButton = new JButton("Calculate");
 		averageLabel = new JLabel("-");
 		
-		
-		
 		DefaultTableModel tableModel = getTableModel();
-		
-		/*
-		String[] columnNames = {"Course code", "Course name", "Grade"};
-		Object[][] data = {
-				{"ABC001", "Math", 3}, {"ABC002", "Physics", 4}, {"ABC003", "Programming", 5}
-		};*/
-		
-		//coursesTable = new JTable(data, columnNames);
-		
-		
 		coursesTable = new JTable(tableModel);
-		
-		Logic.addCourse(new Course("ABC001", "Math", "3"));
-		
+		Logic.addCourse(new Course("ABC001", "Math", "3"));  // for testing
 		
 		String code = Logic.courses.get(0).getCode();
 		String name = Logic.courses.get(0).getName();
@@ -116,77 +147,6 @@ public class GUI extends JFrame implements ActionListener
 		
 	
 		jsp = new JScrollPane(coursesTable);
-	}
-	
-	private void refreshTable()
-	{
-		System.out.println("before");
-		
-		System.out.println(Logic.courses.size());
-		
-		String columnNames[] = {"Course code", "Course title", "Grade"};
-		
-		DefaultTableModel tableModel = new DefaultTableModel(columnNames, 0);
-		
-		coursesTable = new JTable(tableModel);	
-		
-		for (int i = 0; i < Logic.courses.size(); i++)
-		{
-			String code = Logic.courses.get(i).getCode();
-			String name = Logic.courses.get(i).getName();
-			String grade = Logic.courses.get(i).getGrade();
-			
-			Object[] obj = {code, name, grade};
-			
-			tableModel.addRow(obj);
-		}
-		
-		coursesTable.setPreferredScrollableViewportSize(new Dimension(100, 600));
-		coursesTable.setFillsViewportHeight(true);
-		
-		coursesTable.setFont(new Font("Georgia", Font.PLAIN, 15));
-		coursesTable.setRowHeight(50);
-		
-		
-		System.out.println("after");
-	}
-	
-	
-	private DefaultTableModel getTableModel()
-	{
-		String columnNames[] = {"Course code", "Course title", "Grade"};
-		
-		DefaultTableModel tableModel = new DefaultTableModel(columnNames, 0);
-		
-		
-		/*
-		Logic.addCourse(new Course("A001", "CourseName1", "5"));
-		Logic.addCourse(new Course("A002", "CourseName1", "5"));
-		Logic.addCourse(new Course("A003", "CourseName1", "5"));
-		Logic.addCourse(new Course("A004", "CourseName1", "5"));
-		Logic.addCourse(new Course("A005", "CourseName1", "5"));
-		
-		
-		//System.out.println(Logic.courses.size());
-		
-		for (int i = 0; i < Logic.courses.size(); i++)
-		{
-
-			String code = Logic.courses.get(i).getCode();
-
-			String name = Logic.courses.get(i).getName();
-
-			String grade = Logic.courses.get(i).getGrade();
-			
-			
-			Object[] obj = {code, name, grade};
-			
-			
-			tableModel.addRow(obj);
-		}
-		
-		*/
-		return tableModel;		
 	}
 	
 	
@@ -271,6 +231,8 @@ public class GUI extends JFrame implements ActionListener
 		setLayout(new GridLayout(1, 1));
 		add(mainPanel);
 	}
+	
+	
 	
 	
 	public void actionPerformed(ActionEvent e)

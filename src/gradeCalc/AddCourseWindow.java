@@ -109,6 +109,8 @@ public class AddCourseWindow extends JFrame implements ActionListener
 			
 			JOptionPane.showMessageDialog(null, "Course added successfully");
 			
+			GUI.refreshTable();
+			
 			dispose();			
 		}
 	}
